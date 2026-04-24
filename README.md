@@ -215,5 +215,9 @@ Factory setup photos and production-specific images are not included to protect 
 
 ## Author
 
-Rishoban Kandeepan
+**Rishoban Kandeepan**  
 Embedded Systems | Sensor Integration | Real-Time Control
+
+- GitHub: https://github.com/RishobanK
+- Portfolio: https://www.notion.so/Hi-I-m-Rishoban-Kandeepan-251a48156db080fa80acd660c4368469
+- LinkedIn: https://linkedin.com/in/rishoban-kandeepan
