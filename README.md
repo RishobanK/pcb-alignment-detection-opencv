@@ -72,7 +72,7 @@ The system includes:
 4. The system monitors the detection region.
 5. Motion detection checks whether the PCB is stationary.
 6. ORB keypoints and descriptors are extracted.
-7. Feature matches are used to estimate rotation angle.
+7. Feature matches are used to estimate the rotation angle.
 8. If the PCB is aligned, the system shows **OK** and activates the conveyor/motor signal.
 9. If the PCB is misaligned, the system shows **Wrong** and triggers the buzzer alert.
 
@@ -119,3 +119,101 @@ pcb-alignment-detection-opencv/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
+```
+
+---
+
+## 🚀 Running the Project
+
+### Raspberry Pi Deployment Version
+
+Use this version on Raspberry Pi with GPIO output:
+
+```bash
+python3 src/pcb_orientation_detector_pi.py
+```
+
+### Windows / PC Testing Version
+
+Use this version to test the GUI and camera pipeline on Windows without Raspberry Pi GPIO hardware:
+
+```bash
+python src/pcb_orientation_detector_crossplatform.py
+```
+
+The cross-platform version uses mock GPIO when `RPi.GPIO` is unavailable.
+
+---
+
+## 📦 Requirements
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Main dependencies:
+
+- OpenCV
+- NumPy
+- Pillow
+- RPi.GPIO for Raspberry Pi deployment
+
+---
+
+## 🔌 Hardware Connections
+
+| Output | Raspberry Pi GPIO |
+|---|---|
+| Buzzer | GPIO 18 |
+| Conveyor/Motor Signal | GPIO 23 |
+
+> Use proper driver circuitry, relay isolation, or motor driver hardware when controlling external loads. Do not drive motors directly from Raspberry Pi GPIO pins.
+
+---
+
+## 📊 Results
+
+The system was able to detect incorrect PCB orientation using feature-based image comparison. Motion stability checking helped reduce false detections while the PCB was moving into the camera region.
+
+Observed strengths:
+
+- Detects wrong PCB orientation
+- Handles moderate rotation and scaling
+- Avoids detection while the PCB is moving
+- Provides GUI feedback and hardware output signals
+- Can be tested on Windows using the cross-platform script
+
+Current improvement areas:
+
+- Robustness under varying lighting conditions
+- Handling reflective PCB surfaces
+- Improving confidence scoring for similar PCB layouts
+- Future support for template matching or QR-based identification
+
+---
+
+## 🎯 Skills Demonstrated
+
+- Python programming
+- OpenCV computer vision
+- Feature matching using ORB
+- Tkinter GUI development
+- Raspberry Pi GPIO integration
+- Real-time image processing
+- Industrial automation workflow
+- Hardware-software integration
+
+---
+
+## ⚠️ Public Repository Note
+
+Factory setup photos and production-specific images are not included to protect workplace and production confidentiality. Public sample images are used only to demonstrate the detection workflow.
+
+---
+
+## Author
+
+Rishoban Kandeepan
+Embedded Systems | Sensor Integration | Real-Time Control
