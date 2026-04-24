@@ -40,13 +40,13 @@ The system includes:
 
 ### GUI Screenshot
 
-![GUI Screenshot](images/gui_screenshot.png)
+![GUI Screenshot](images/gui_screenshot.jpeg)
 
 ### Sample Detection Images
 
 | Reference PCB | Wrong Orientation |
 |---|---|
-| ![Reference PCB](samples/reference_pcb.jpg) | ![Wrong Orientation PCB](samples/wrong_orientation_pcb.jpg) |
+| ![Reference PCB](samples/reference_pcb.jpeg) | ![Wrong Orientation PCB](samples/wrong_orientation_pcb.jpeg) |
 
 ---
 
