@@ -213,7 +213,7 @@ Factory setup photos and production-specific images are not included to protect 
 
 ---
 
-## Author
+## 👤 Author
 
 **Rishoban Kandeepan**  
 Embedded Systems | Sensor Integration | Real-Time Control
