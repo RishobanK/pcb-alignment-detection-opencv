@@ -1,0 +1,35 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# IDE/editor files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local environment files
+.env
+
+# Test outputs and debug captures
+output/
+captures/
+debug_frames/
+
+# Large video files
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
