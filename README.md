@@ -103,6 +103,71 @@ Default parameters:
 | Motor/Conveyor GPIO | BCM 23 |
 
 ---
+---
+
+## 🧩 Version 2: Simplified Homography-Based Implementation
+
+A simplified implementation was later added to focus more directly on the core computer vision pipeline.
+
+The original version is a fuller Raspberry Pi prototype with Tkinter GUI, GPIO output, motion stability checking, ROI validation, ORB matching, and homography-based angle estimation.
+
+The simplified version keeps the main feature-matching and homography approach, but removes the heavier GUI, GPIO, and additional control logic. This makes the system easier to explain, debug, tune, and demonstrate.
+
+Main simplified file:
+
+```text
+src/pcb_orientation_simplified.py
+```
+
+### Simplified Pipeline
+
+```text
+Camera frame
+    ↓
+Select reference PCB ROI
+    ↓
+Extract ORB features from reference image
+    ↓
+Extract ORB features from live frame
+    ↓
+Match features using BFMatcher + Hamming distance
+    ↓
+Filter weak matches
+    ↓
+Estimate homography using RANSAC
+    ↓
+Transform reference PCB corners into live frame
+    ↓
+Calculate PCB angle using atan2
+    ↓
+Display OK / ADJUST PCB / LOW CONFIDENCE
+```
+
+### Additional Improvements in Version 2
+
+* Runtime reference ROI capture and recapture
+* Homography-based detected PCB outline
+* Angle calculation from transformed PCB corners
+* Inlier count and inlier ratio confidence check
+* Temporal smoothing to reduce status flickering
+* Detection time display for performance observation
+* Simpler OpenCV-based interface for easier testing
+
+### Difference from Version 1
+
+| Area               | Version 1                          | Version 2                              |
+| ------------------ | ---------------------------------- | -------------------------------------- |
+| Interface          | Tkinter GUI                        | OpenCV window                          |
+| Hardware support   | GPIO output included               | Vision-only                            |
+| Detection approach | ORB + homography with extra checks | ORB + homography-focused pipeline      |
+| Motion handling    | Motion/stability checking          | Temporal status smoothing              |
+| Angle calculation  | Based on homography matrix         | Based on transformed PCB corners       |
+| Confidence check   | Match/homography-based             | Inlier count + inlier ratio            |
+| Purpose            | Full Raspberry Pi prototype        | Simplified, explainable implementation |
+
+The simplified version was created to make the core PCB alignment detection logic easier to understand, demonstrate, and tune.
+
+---
 
 ## 📁 Repository Structure
 
@@ -110,12 +175,20 @@ Default parameters:
 pcb-alignment-detection-opencv/
 ├── src/
 │   ├── pcb_orientation_detector_pi.py
-│   └── pcb_orientation_detector_crossplatform.py
+│   ├── pcb_orientation_detector_crossplatform.py
+│   └── pcb_orientation_simplified.py
+├── docs/
+│   └── approach_notes.md
 ├── images/
-│   └── gui_screenshot.png
+│   └── gui_screenshot.jpeg
 ├── samples/
-│   ├── reference_pcb.jpg
-│   └── wrong_orientation_pcb.jpg
+│   ├── reference_pcb.jpeg
+│   └── wrong_orientation_pcb.jpeg
+├── demo_assets/
+│   └── v2/
+│       ├── ok_alignment.png
+│       ├── adjust_pcb.png
+│       └── low_confidence.png
 ├── requirements.txt
 ├── .gitignore
 └── README.md
@@ -138,7 +211,43 @@ python3 src/pcb_orientation_detector_pi.py
 Use this version to test the GUI and camera pipeline on Windows without Raspberry Pi GPIO hardware:
 
 ```bash
+python src/pcb_ori## 🚀 Running the Project
+
+### Raspberry Pi Deployment Version
+
+Use this version on Raspberry Pi with GPIO output:
+
+```bash
+python3 src/pcb_orientation_detector_pi.py
+```
+
+### Windows / PC Testing Version
+
+Use this version to test the GUI and camera pipeline on Windows without Raspberry Pi GPIO hardware:
+
+```bash
 python src/pcb_orientation_detector_crossplatform.py
+```
+
+The cross-platform version uses mock GPIO when `RPi.GPIO` is unavailable.
+
+### Simplified Homography-Based Version
+
+Use this version to run the simplified OpenCV-based alignment detection pipeline:
+
+```bash
+python src/pcb_orientation_simplified.py
+```
+
+Controls for the simplified version:
+
+```text
+r  - select / recapture reference PCB ROI
+q  - quit
+```
+
+The simplified version allows the reference PCB region to be recaptured during runtime without restarting the program.
+entation_detector_crossplatform.py
 ```
 
 The cross-platform version uses mock GPIO when `RPi.GPIO` is unavailable.
