@@ -103,7 +103,6 @@ Default parameters:
 | Motor/Conveyor GPIO | BCM 23 |
 
 ---
----
 
 ## 🧩 Version 2: Simplified Homography-Based Implementation
 
@@ -211,21 +210,6 @@ python3 src/pcb_orientation_detector_pi.py
 Use this version to test the GUI and camera pipeline on Windows without Raspberry Pi GPIO hardware:
 
 ```bash
-python src/pcb_ori## 🚀 Running the Project
-
-### Raspberry Pi Deployment Version
-
-Use this version on Raspberry Pi with GPIO output:
-
-```bash
-python3 src/pcb_orientation_detector_pi.py
-```
-
-### Windows / PC Testing Version
-
-Use this version to test the GUI and camera pipeline on Windows without Raspberry Pi GPIO hardware:
-
-```bash
 python src/pcb_orientation_detector_crossplatform.py
 ```
 
@@ -247,10 +231,7 @@ q  - quit
 ```
 
 The simplified version allows the reference PCB region to be recaptured during runtime without restarting the program.
-entation_detector_crossplatform.py
-```
 
-The cross-platform version uses mock GPIO when `RPi.GPIO` is unavailable.
 
 ---
 
